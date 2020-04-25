@@ -5,19 +5,32 @@
     <title>Dice launcher</title>
 
     <script type = "text/javascript">
-       function launchDice() {
-          var img = new Image();
-          img.src = "dices/2-rouge.png";
-          img.width = "100";
+      function launchDice() {
           dicesElem = document.getElementById("dices");
-          dicesElem.appendChild(img);
-       }
+
+          var nbAnalyste = document.getElementById("analystes").value;
+          addRedDice(dicesElem, nbAnalyste);
+      }
+
+      function addRedDice(dicesElem, nbAnalyste){
+        for (var i = 0 ; i < nbAnalyste; i ++) {
+          dicesElem.appendChild(createDice());
+        }
+      }
+
+      function createDice() {
+        var img = new Image();
+        img.src = "dices/2-rouge.png";
+        img.width = "100";
+
+        return img;
+      }
     </script>
   </head>
   <body>
-    Nombre d'analystes : <input type="text" value="0"><br />
-    Nombre de développeurs : <input type="text" value="0"><br />
-    Nombre de testeurs : <input type="text" value="0"> <br />
+    Nombre d'analystes : <input id="analystes" type="text" value="2"><br />
+    Nombre de développeurs : <input id="devs" type="text" value="0"><br />
+    Nombre de testeurs : <input id="tests" type="text" value="0"> <br />
 
     <a href="#" onclick = "launchDice()"> >> Lancer les dés << </a> <br />
 
