@@ -2,13 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>title</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Dice launcher</title>
+
+    <script type = "text/javascript">
+       function launchDice() {
+          var img = new Image();
+          img.src = "dices/2-rouge.png";
+          img.width = "100";
+          dicesElem = document.getElementById("dices");
+          dicesElem.appendChild(img);
+       }
+    </script>
   </head>
   <body>
-    <img src="dices/2-rouge.png" width="100px">
-    <img src="dices/2-rouge.png" width="100px">
-    <img src="dices/2-rouge.png" width="100px">
+    Nombre d'analystes : <input type="text" value="0"><br />
+    Nombre de développeurs : <input type="text" value="0"><br />
+    Nombre de testeurs : <input type="text" value="0"> <br />
+
+    <a href="#" onclick = "launchDice()"> >> Lancer les dés << </a> <br />
+
+    <div id="dices">
+      
+    </div>
   </body>
 </html>
