@@ -7,6 +7,7 @@
     <script type = "text/javascript">
       function launchDice() {
           dicesElem = document.getElementById("dices");
+          dicesElem.innerHTML = "";
 
           var nbAnalyste = document.getElementById("analystes").value;
           addRedDice(dicesElem, nbAnalyste);
