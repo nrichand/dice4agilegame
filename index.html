@@ -4,34 +4,51 @@
     <meta charset="utf-8">
     <title>Dice launcher</title>
 
+    <style>
+      body {
+        background-color: linen;
+        margin-left: 40px;
+      }
+    </style>
+
     <script type = "text/javascript">
       function launchDice() {
           dicesElem = document.getElementById("dices");
           dicesElem.innerHTML = "";
 
           var nbAnalyste = document.getElementById("analystes").value;
-          addRedDice(dicesElem, nbAnalyste);
+          var nbDev = document.getElementById("devs").value;
+          var nbTest = document.getElementById("tests").value;
+
+          addRedDice(dicesElem, nbAnalyste, nbDev, nbTest);
       }
 
-      function addRedDice(dicesElem, nbAnalyste){
+      function addRedDice(dicesElem, nbAnalyste, nbDev, nbTest){
         for (var i = 0 ; i < nbAnalyste; i ++) {
-          dicesElem.appendChild(createDice());
+          dicesElem.appendChild(createDice("rouge"));
+        }
+
+        for (var i = 0 ; i < nbDev; i ++) {
+          dicesElem.appendChild(createDice("bleu"));
+        }
+
+        for (var i = 0 ; i < nbTest; i ++) {
+          dicesElem.appendChild(createDice("vert"));
         }
       }
 
-      function createDice() {
+      function createDice(color) {
         var img = new Image();
-        img.src = "dices/2-rouge.png";
+        img.src = "dices/2-" + color + ".png";
         img.width = "100";
-
         return img;
       }
     </script>
   </head>
   <body>
     Nombre d'analystes : <input id="analystes" type="text" value="2"><br />
-    Nombre de développeurs : <input id="devs" type="text" value="0"><br />
-    Nombre de testeurs : <input id="tests" type="text" value="0"> <br />
+    Nombre de développeurs : <input id="devs" type="text" value="3"><br />
+    Nombre de testeurs : <input id="tests" type="text" value="2"> <br />
 
     <a href="#" onclick = "launchDice()"> >> Lancer les dés << </a> <br />
 
