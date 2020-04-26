@@ -12,18 +12,28 @@
     </style>
 
     <script type = "text/javascript">
+      var pointsAnalyse = 0;
+      var pointsDev = 0;
+      var pointsTest = 0;
+      var teamName = "";
+
       function launchDice() {
-          dicesElem = document.getElementById("dices");
-          dicesElem.innerHTML = "";
+        pointsAnalyse = 0;
+        pointsDev = 0;
+        pointsTest = 0;
 
-          var nbAnalyste = document.getElementById("analystes").value;
-          var nbDev = document.getElementById("devs").value;
-          var nbTest = document.getElementById("tests").value;
+        dicesElem = document.getElementById("dices");
+        dicesElem.innerHTML = "";
 
-          addRedDice(dicesElem, nbAnalyste, nbDev, nbTest);
+        var nbAnalyste = document.getElementById("analystes").value;
+        var nbDev = document.getElementById("devs").value;
+        var nbTest = document.getElementById("tests").value;
+
+        addColoredDice(dicesElem, nbAnalyste, nbDev, nbTest);
+        computeAndDisplayScore();
       }
 
-      function addRedDice(dicesElem, nbAnalyste, nbDev, nbTest){
+      function addColoredDice(dicesElem, nbAnalyste, nbDev, nbTest){
         for (var i = 0 ; i < nbAnalyste; i ++) {
           dicesElem.appendChild(createDice("rouge"));
         }
@@ -38,7 +48,15 @@
       }
 
       function createDice(color) {
-        var number =  Math.floor((Math.random() * 5) + 1); ;
+        var number =  Math.floor((Math.random() * 6) + 1); ;
+
+        if(color == "rouge") {
+          pointsAnalyse = pointsAnalyse + number;
+        } else if (color == "bleu") {
+          pointsDev = pointsDev + number;
+        } else {
+          pointsTest = pointsTest + number;
+        }
 
         var img = new Image();
         img.src = "dices/" + number +"-" + color + ".png";
@@ -46,8 +64,21 @@
         return img;
       }
 
+      function computeAndDisplayScore() {
+        var score = pointsAnalyse + pointsDev +pointsTest;
+        if(teamName == "analystes"){
+          score = score + pointsAnalyse;
+        } else if(teamName == "devs"){
+          score = score + pointsDev;
+        } else if(teamName == "tests"){
+          score = score + pointsTest;
+        }
+
+        document.getElementById("score").innerHTML = "Votre score : "+score;
+      }
+
       function init(){
-        var teamName = getUrlParam("team", "");
+        teamName = getUrlParam("team", "");
         document.getElementById("teamName").innerHTML = teamName;
 
         if(teamName == "analystes"){
@@ -92,5 +123,7 @@
     <div id="dices">
       
     </div>
+
+    <h2 id="score"></h2>
   </body>
 </html>
