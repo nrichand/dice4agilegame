@@ -43,12 +43,49 @@
         img.width = "100";
         return img;
       }
+
+      function init(){
+        var teamName = getUrlParam("team", "");
+        document.getElementById("teamName").innerHTML = teamName;
+
+        if(teamName == "analystes"){
+          document.getElementById("analystes").value = 2;
+        }
+
+        if(teamName == "devs"){
+          document.getElementById("devs").value = 3;
+        }
+
+        if(teamName == "tests"){
+          document.getElementById("tests").value = 2;
+        }
+
+      }
+
+
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+      }
+
+      function getUrlParam(parameter, defaultvalue){
+        var urlparameter = defaultvalue;
+        if(window.location.href.indexOf(parameter) > -1){
+          urlparameter = getUrlVars()[parameter];
+        }
+        return urlparameter;
+      }
     </script>
   </head>
-  <body>
-    Nombre d'analystes : <input id="analystes" type="text" value="2"><br />
-    Nombre de développeurs : <input id="devs" type="text" value="3"><br />
-    Nombre de testeurs : <input id="tests" type="text" value="2"> <br />
+  <body onload="init()">
+    <h1> Vous jouez l'équipe : <span id="teamName"></span></h1>
+
+    Nombre d'analystes : <input id="analystes" type="text" value="0"><br />
+    Nombre de développeurs : <input id="devs" type="text" value="0"><br />
+    Nombre de testeurs : <input id="tests" type="text" value="0"> <br />
 
     <a href="#" onclick = "launchDice()"> >> Lancer les dés << </a> <br />
 
