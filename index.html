@@ -38,8 +38,10 @@
       }
 
       function createDice(color) {
+        var number =  Math.floor((Math.random() * 3) + 1); ;
+
         var img = new Image();
-        img.src = "dices/2-" + color + ".png";
+        img.src = "dices/" + number +"-" + color + ".png";
         img.width = "100";
         return img;
       }
@@ -59,9 +61,7 @@
         if(teamName == "tests"){
           document.getElementById("tests").value = 2;
         }
-
       }
-
 
       function getUrlVars() {
         var vars = {};
